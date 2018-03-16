@@ -6,16 +6,6 @@ import os
 import network
 from sklearn.metrics import average_precision_score
 
-FLAGS = tf.app.flags.FLAGS
-#change the name to who you want to send
-#tf.app.flags.DEFINE_string('wechat_name', 'Tang-24-0325','the user you want to send info to')
-tf.app.flags.DEFINE_string('wechat_name', 'filehelper','the user you want to send info to')
-
-#if you want to try itchat, please set it to True
-itchat_run = False
-if itchat_run:
-	import itchat
-
 def main(_):
 
 	# ATTENTION: change pathname before you load your model
@@ -224,11 +214,6 @@ def main(_):
 						correct_num_300 += 1.0
 				print correct_num_300/300
 
-				if itchat_run:
-					tempstr = 'P@100\n'+str(correct_num_100/100)+'\n'+'P@200\n'+str(correct_num_200/200)+'\n'+'P@300\n'+str(correct_num_300/300)
-	 				itchat.send(tempstr,FLAGS.wechat_name)
 
 if __name__ == "__main__":
-	if itchat_run:
-		itchat.auto_login(hotReload=True,enableCmdQR=2)
 	tf.app.run() 
