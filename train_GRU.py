@@ -6,20 +6,6 @@ import os
 import network
 from tensorflow.contrib.tensorboard.plugins import projector
 
-
-FLAGS = tf.app.flags.FLAGS
-
-tf.app.flags.DEFINE_string('summary_dir', '.','path to store summary')
-
-#change the name to who you want to send
-#tf.app.flags.DEFINE_string('wechat_name', 'Tang-24-0325','the user you want to send info to')
-tf.app.flags.DEFINE_string('wechat_name', 'filehelper','the user you want to send info to')
-
-#if you want to try itchat, please set it to True
-itchat_run = False
-if itchat_run:
-	import itchat
-
 def main(_):
 	# the path to save models
 	save_path = './model/'
@@ -155,10 +141,5 @@ def main(_):
 						tempstr = 'have saved model to '+path
 						print tempstr
 
-			if itchat_run:
-				itchat.send('training has been finished!',FLAGS.wechat_name)
-
 if __name__ == "__main__":
-	if itchat_run:
-		itchat.auto_login(hotReload=True,enableCmdQR=2)
 	tf.app.run() 
